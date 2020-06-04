@@ -41,6 +41,16 @@ const checkPassword = (pass1, pass2) => {
     }
 }
 
+const checkEmail  = email => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   
+    if(re.test(email.value)) {
+        clearError(email)
+    } else {
+        showError(email, "Email is incorrect")
+    }
+}
+
 clearBtn.addEventListener('click', e => {
     e.preventDefault();
     [username, pass, pass2, email].forEach(el => {
@@ -56,5 +66,5 @@ sendBtn.addEventListener('click', e => {
     checkLength(username, 3);
     checkLength(pass, 8);
     checkPassword(pass, pass2);
-
+    checkEmail(email);
 })
