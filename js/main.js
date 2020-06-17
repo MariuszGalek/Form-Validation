@@ -25,8 +25,8 @@ const checkForm = input => {
             showError(el, el.placeholder)
         } else {
             clearError(el);
-        }
-    })
+        };
+    });
 }
 
 const checkLength = (input, min) => {
@@ -51,6 +51,21 @@ const checkEmail  = email => {
     }
 }
 
+const checkErrors = () => {
+    const allInputs = document.querySelectorAll('.form-box');
+    let errorCount = 0;
+
+    allInputs.forEach(el => {
+        if(el.classList.contains('error')) {
+            errorCount++;
+        }
+    })
+
+        if(errorCount === 0) {
+            popup.classList.add('show-popup');
+        }
+}
+
 clearBtn.addEventListener('click', e => {
     e.preventDefault();
     [username, pass, pass2, email].forEach(el => {
@@ -67,4 +82,5 @@ sendBtn.addEventListener('click', e => {
     checkLength(pass, 8);
     checkPassword(pass, pass2);
     checkEmail(email);
+    checkErrors();
 })
